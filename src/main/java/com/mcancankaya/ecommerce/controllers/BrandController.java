@@ -4,6 +4,7 @@ import com.mcancankaya.ecommerce.core.response.CustomResponse;
 import com.mcancankaya.ecommerce.services.BrandService;
 import com.mcancankaya.ecommerce.services.dtos.request.brand.UpdateBrandRequest;
 import com.mcancankaya.ecommerce.services.dtos.request.brand.CreateBrandRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +29,12 @@ public class BrandController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomResponse<?>> create(@RequestBody CreateBrandRequest request) {
+    public ResponseEntity<CustomResponse<?>> create(@RequestBody @Valid CreateBrandRequest request) {
         return ResponseEntity.ok(brandService.create(request));
     }
 
     @PutMapping
-    public ResponseEntity<CustomResponse<?>> update(@RequestBody UpdateBrandRequest request) {
+    public ResponseEntity<CustomResponse<?>> update(@RequestBody @Valid UpdateBrandRequest request) {
         return ResponseEntity.ok(brandService.update(request));
     }
 
