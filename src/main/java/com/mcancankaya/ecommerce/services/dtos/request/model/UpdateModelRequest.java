@@ -1,9 +1,6 @@
 package com.mcancankaya.ecommerce.services.dtos.request.model;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +13,7 @@ public class UpdateModelRequest {
     private Integer id;
     @NotNull
     @NotEmpty
-    @Min(1)
+    @Size(min = 2)
     @NotBlank
     private String modelName;
     @NotNull

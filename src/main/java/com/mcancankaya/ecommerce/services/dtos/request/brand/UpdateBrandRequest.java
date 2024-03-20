@@ -3,6 +3,7 @@ package com.mcancankaya.ecommerce.services.dtos.request.brand;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,6 @@ public class UpdateBrandRequest {
 
     @NotNull
     @NotEmpty
-    @Min(value = 2)
+    @Size(min = 2)
     private String name;
 }

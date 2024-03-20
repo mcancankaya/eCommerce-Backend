@@ -13,20 +13,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "models", schema = "ecommerce")
-public class Model {
+@Table(name = "categories", schema = "ecommerce")
+public class Category {
     @Id
-    @GeneratedValue(generator = "model_id_generator")
-    @SequenceGenerator(schema = "ecommerce", name = "model_id_generator", sequenceName = "model_id_seq", allocationSize = 1)
+    @GeneratedValue(generator = "category_id_generator")
+    @SequenceGenerator(schema = "ecommerce", name = "category_id_generator", sequenceName = "category_id_seq", allocationSize = 1)
     private Integer id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
-
-    @OneToMany(mappedBy = "model", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> products;
 }
