@@ -4,8 +4,6 @@ import com.mcancankaya.ecommerce.services.ModelService;
 import com.mcancankaya.ecommerce.services.dtos.request.model.CreateModelRequest;
 import com.mcancankaya.ecommerce.services.dtos.request.model.UpdateModelRequest;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -10,9 +10,7 @@ import com.mcancankaya.ecommerce.services.dtos.response.ModelResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.print.attribute.standard.Destination;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +20,10 @@ public class ModelService {
 
     public CustomResponse<ModelResponse> create(CreateModelRequest request) {
         Model model = modelMapperService.forRequest().map(request, Model.class);
-        modelRepository.save(model);
-        System.out.println(model.getBrand() + "." + model.getName() + "." + model.getId());
-        return null;
+        Model savedModel = modelRepository.save(model);
+        ModelResponse modelResponse = modelMapperService.forResponse().map(savedModel, ModelResponse.class);
+
+        return new CustomResponse<>(modelResponse, "Model Created.");
     }
 
     public CustomResponse<ModelResponse> update(UpdateModelRequest request) {
