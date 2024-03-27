@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ModelResponse {
-    private Integer id;
-    private String name;
-    private BrandResponse brand;
+public class UserResponse {
+    private String firstName;
+    private String lastName;
+    private String email;
 }

@@ -18,8 +18,14 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ModelMapperService modelMapperService;
 
+    private static boolean productIsActive(Product product) {
+        return product.getIsActive();
+    }
+
     public CustomResponse<ProductResponse> create(CreateProductRequest request) {
         Product product = modelMapperService.forRequest().map(request, Product.class);
+        product.setIsActive(true);
+
         Product savedProduct = productRepository.save(product);
         ProductResponse productResponse = modelMapperService.forResponse().map(savedProduct, ProductResponse.class);
         return new CustomResponse<>(productResponse, "Product created successfully.");
@@ -38,7 +44,7 @@ public class ProductService {
     }
 
     public CustomResponse<List<ProductResponse>> getAll() {
-        List<Product> products = productRepository.findAll();
+        List<Product> products = productRepository.findAll().stream().filter(ProductService::productIsActive).toList();
         List<ProductResponse> productResponseList = products.stream().map(product -> modelMapperService.forResponse().map(product, ProductResponse.class)).toList();
         return new CustomResponse<>(productResponseList, "Products listed.");
     }

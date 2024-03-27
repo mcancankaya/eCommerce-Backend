@@ -39,4 +39,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "model_id")
     private Model model;
+
+    @Column(name = "status")
+    private Boolean isActive;
 }
