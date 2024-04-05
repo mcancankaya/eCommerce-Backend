@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,29 +22,29 @@ public class CategoryService {
         Category category = modelMapperService.forRequest().map(request, Category.class);
         Category savedCategory = categoryRepository.save(category);
         CategoryResponse savedCategoryResponse = modelMapperService.forResponse().map(savedCategory, CategoryResponse.class);
-        return new CustomResponse<>(savedCategoryResponse, "Category created.");
+        return new CustomResponse<>(savedCategoryResponse, "Kategori Oluşturuldu.");
     }
 
     public CustomResponse<CategoryResponse> update(UpdateCategoryRequest request) {
         Category category = modelMapperService.forRequest().map(request, Category.class);
         Category updatedCategory = categoryRepository.save(category);
         CategoryResponse updatedCategoryResponse = modelMapperService.forResponse().map(updatedCategory, CategoryResponse.class);
-        return new CustomResponse<>(updatedCategoryResponse, "Category updated.");
+        return new CustomResponse<>(updatedCategoryResponse, "Kategori güncellendi.");
     }
 
     public CustomResponse<?> deleteById(Integer id) {
         categoryRepository.deleteById(id);
-        return new CustomResponse<>("Category deleted.");
+        return new CustomResponse<>("Kategori silindi.");
     }
 
     public CustomResponse<List<CategoryResponse>> getAll() {
         List<Category> categories = categoryRepository.findAll();
         List<CategoryResponse> categoryResponses = categories.stream().map(category -> modelMapperService.forResponse().map(category, CategoryResponse.class)).toList();
-        return new CustomResponse<List<CategoryResponse>>(categoryResponses, "Categories Listed.");
+        return new CustomResponse<>(categoryResponses, "Kategoriler listelendi.");
     }
 
     public CustomResponse<CategoryResponse> getById(Integer id) {
         CategoryResponse categoryResponse = modelMapperService.forResponse().map(categoryRepository.findById(id), CategoryResponse.class);
-        return new CustomResponse<CategoryResponse>(categoryResponse, "Category listed.");
+        return new CustomResponse<>(categoryResponse, "Kategori Id'e göre listelendi.");
     }
 }

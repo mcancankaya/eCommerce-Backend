@@ -23,29 +23,35 @@ public class ModelService {
         Model savedModel = modelRepository.save(model);
         ModelResponse modelResponse = modelMapperService.forResponse().map(savedModel, ModelResponse.class);
 
-        return new CustomResponse<>(modelResponse, "Model Created.");
+        return new CustomResponse<>(modelResponse, "Model oluşturuldu.");
     }
 
     public CustomResponse<ModelResponse> update(UpdateModelRequest request) {
         Model model = modelMapperService.forRequest().map(request, Model.class);
         Model updatedModel = modelRepository.save(model);
         ModelResponse response = modelMapperService.forResponse().map(updatedModel, ModelResponse.class);
-        return new CustomResponse<>(response, "Model updated.");
+        return new CustomResponse<>(response, "Model güncellendi.");
     }
 
     public CustomResponse<?> deleteById(Integer id) {
         modelRepository.deleteById(id);
-        return new CustomResponse<>("Model deleted.");
+        return new CustomResponse<>("Model silindi.");
     }
 
     public CustomResponse<List<ModelResponse>> getAll() {
         List<Model> models = modelRepository.findAll();
         List<ModelResponse> modelResponses = models.stream().map((model) -> modelMapperService.forResponse().map(model, ModelResponse.class)).toList();
-        return new CustomResponse<>(modelResponses, "Model Listed.");
+        return new CustomResponse<>(modelResponses, "Modeller listelendi.");
     }
 
     public CustomResponse<ModelResponse> getById(Integer id) {
         ModelResponse modelResponse = modelMapperService.forRequest().map(modelRepository.findById(id), ModelResponse.class);
-        return new CustomResponse<>(modelResponse, "Model listed.");
+        return new CustomResponse<>(modelResponse, "Model Id'e göre listelendi.");
+    }
+
+    public CustomResponse<List<ModelResponse>> getByBrandId(Integer brandId) {
+        List<Model> models = modelRepository.findByBrandId(brandId);
+        List<ModelResponse> modelResponses = models.stream().map((model) -> modelMapperService.forResponse().map(model, ModelResponse.class)).toList();
+        return new CustomResponse<>(modelResponses, "Model Marka'ya göre listelendi.");
     }
 }

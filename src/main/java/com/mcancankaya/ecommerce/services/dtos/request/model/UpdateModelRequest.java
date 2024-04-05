@@ -15,7 +15,7 @@ public class UpdateModelRequest {
     @NotEmpty
     @Size(min = 2)
     @NotBlank
-    private String modelName;
+    private String name;
     @NotNull
     private Integer brandId;
 }

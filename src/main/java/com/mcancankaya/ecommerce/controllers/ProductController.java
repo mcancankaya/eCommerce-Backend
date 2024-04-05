@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -27,9 +28,19 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAll());
     }
 
+    @GetMapping(path = "/filter", params = {"model", "category"})
+    public ResponseEntity<?> getFilterByCategoryAndModel(@RequestParam Integer model, @RequestParam Integer category) {
+        return ResponseEntity.ok(productService.getFilterByModelIdAndCategoryId(model, category));
+    }
+
+    @GetMapping("/byCategory/{categoryId}")
+    public ResponseEntity<?> getByCategoryId(@PathVariable("categoryId") Integer categoryId) {
+        return ResponseEntity.ok(productService.getFilterByCategoryId(categoryId));
+    }
+
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody @Valid CreateProductRequest request) {
-        return ResponseEntity.ok(productService.create(request));
+    public ResponseEntity<?> create(@RequestPart("file") MultipartFile file, @RequestPart("product") @Valid CreateProductRequest request) {
+        return ResponseEntity.ok(productService.create(file, request));
     }
 
     @PutMapping

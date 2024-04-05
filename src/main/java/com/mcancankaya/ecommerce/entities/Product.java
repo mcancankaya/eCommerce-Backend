@@ -42,4 +42,7 @@ public class Product {
 
     @Column(name = "status")
     private Boolean isActive;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 }

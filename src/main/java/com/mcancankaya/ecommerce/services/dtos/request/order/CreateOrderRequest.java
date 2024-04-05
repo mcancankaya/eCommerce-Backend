@@ -8,5 +8,7 @@ import java.util.List;
 @Data
 public class CreateOrderRequest {
     @NotNull
+    private Integer userId;
+    @NotNull
     private List<OrderItemRequest> orderItems;
 }

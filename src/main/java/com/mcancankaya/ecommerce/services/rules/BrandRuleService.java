@@ -15,6 +15,5 @@ public class BrandRuleService {
         if (isAvailable) {
             throw new BusinessException("Brand name is already available.");
         }
-
     }
 }

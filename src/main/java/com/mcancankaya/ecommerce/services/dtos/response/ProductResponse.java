@@ -17,4 +17,6 @@ public class ProductResponse {
     private CategoryResponse category;
     private ModelResponse model;
     private BigDecimal price;
+    private Boolean isActive;
+    private String imageUrl;
 }

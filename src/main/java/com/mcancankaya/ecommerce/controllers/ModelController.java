@@ -26,6 +26,11 @@ public class ModelController {
         return ResponseEntity.ok(modelService.getById(id));
     }
 
+    @GetMapping(params = {"brandId"})
+    public ResponseEntity<?> getByBrandId(@RequestParam("brandId") Integer brandId) {
+        return ResponseEntity.ok(modelService.getByBrandId(brandId));
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid CreateModelRequest request) {
         return ResponseEntity.ok(modelService.create(request));

@@ -26,6 +26,11 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getById(id));
     }
 
+    @GetMapping(path = "/user/{id}")
+    public ResponseEntity<?> getByUserId(@PathVariable("id") Integer userId) {
+        return ResponseEntity.ok(orderService.getByUserId(userId));
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid CreateOrderRequest request) {
         return ResponseEntity.ok(orderService.create(request));
