@@ -29,4 +29,5 @@ public class UpdateProductRequest {
     private BigDecimal price;
     @NotNull
     private Boolean isActive;
+    private String imageUrl;
 }

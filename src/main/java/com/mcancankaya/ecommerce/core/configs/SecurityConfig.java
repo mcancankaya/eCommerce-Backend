@@ -29,7 +29,7 @@ public class SecurityConfig {
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
 
-    private String[] myEndpoints = new String[]{"/api/v1/product/**", "/api/v1/brand/**", "/api/v1/model/**", "/api/v1/category/**", "/api/v1/order/**"};
+    private String[] myEndpoints = new String[]{"/api/v1/product/**", "/api/v1/brand/**", "/api/v1/model/**", "/api/v1/category/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -41,6 +41,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, myEndpoints).hasAnyAuthority(Role.ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, myEndpoints).hasAnyAuthority(Role.ADMIN.name())
                                 .requestMatchers(HttpMethod.GET, "/api/v1/order/**").hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/api/v1/order/**").hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
                                 .requestMatchers(HttpMethod.GET, myEndpoints).permitAll()
                                 .anyRequest().authenticated()
                 )

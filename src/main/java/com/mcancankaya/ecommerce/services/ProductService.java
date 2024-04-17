@@ -1,5 +1,6 @@
 package com.mcancankaya.ecommerce.services;
 
+import com.mcancankaya.ecommerce.core.exceptions.BusinessException;
 import com.mcancankaya.ecommerce.core.mapper.ModelMapperService;
 import com.mcancankaya.ecommerce.core.response.CustomResponse;
 import com.mcancankaya.ecommerce.entities.Product;
@@ -45,7 +46,9 @@ public class ProductService {
     }
 
     public CustomResponse<ProductResponse> update(UpdateProductRequest request) {
+        Product currentProduct = productRepository.findById(request.getId()).orElseThrow(()-> new BusinessException("Ürün Bulunamadı."));
         Product product = modelMapperService.forRequest().map(request, Product.class);
+        product.setImageUrl(currentProduct.getImageUrl());
         Product updatedProduct = productRepository.save(product);
         ProductResponse updatedProductResponse = modelMapperService.forResponse().map(updatedProduct, ProductResponse.class);
         return new CustomResponse<>(updatedProductResponse, "Ürün güncellendi.");
